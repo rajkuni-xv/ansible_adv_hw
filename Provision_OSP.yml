@@ -1,0 +1,40 @@
+- hosts: jumpbox
+  become: yes
+  roles:
+     - osp-network
+     - osp-keypair
+     - osp-securitygroup
+     - osp-flavor
+
+  tasks:
+
+  #Create frontend instance
+  - name: Create frontend instance
+    include_role:
+       name: osp-instances
+       vars_from: frontend.yaml
+
+  #Create app1 server
+  - name: Create app1 instance
+    include_role:
+       name: osp-instances
+       vars_from: app1.yaml
+
+  #Create app2 server
+  - name: Create app2 instance
+    include_role:
+       name: osp-instances
+       vars_from: app2.yaml
+
+  #Create DB server
+  - name: Create db instance
+    include_role:
+       name: osp-instances
+       vars_from: db.yaml
+
+  #Method to create dynamic inventory
+  #- name: Gather facts
+  #  include_role:
+  #     name: osp-facts
+  #  tags:
+  #   - test_inventory

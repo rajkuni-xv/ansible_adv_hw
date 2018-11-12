@@ -1,0 +1,29 @@
+---
+# generates an in-memory inventory
+# This playbook is nearly identical to one from Prakhar's repo: 
+# https://github.com/prakhar1985/good-ansible/blob/master/3tier-good/main.yml
+- hosts: jumpbox
+  gather_facts: true
+  roles:
+  - name: osp-facts 
+
+- name: setup load-balancer tier
+  hosts: frontend_servers
+  become: yes
+  roles:
+    - base-config
+    - {name: lb-tier, tags: [lbs, haproxy]
+
+- name: setup app tier
+  hosts: app_servers
+  become: yes
+  roles:
+    - base-config
+    - {name: app-tier, tags: [apps, tomcat]}
+
+- name: setup database tier
+  become: yes
+  hosts: db_servers 
+  roles:
+    - {name: base-config, tags: base-config}
+    - {name: geerlingguy.postgresql, tags: [dbs, postgres]}    
