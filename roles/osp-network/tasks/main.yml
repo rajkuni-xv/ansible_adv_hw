@@ -49,3 +49,4 @@
         - subnet: external_subnet
       interfaces:
         - int_subnet
+      ignore_errors: yes #os_router not idempotent? ignore error when os_router already exists!
