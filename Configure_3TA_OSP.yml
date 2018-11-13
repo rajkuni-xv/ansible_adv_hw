@@ -29,6 +29,7 @@
     - {name: geerlingguy.postgresql, tags: [dbs, postgres]}    
 
 - name: smoke test curl to frontend
+  hosts: jumpbox
   uri:
     url: http://frontend1.{{ GUID }}.internal
     method: GET
