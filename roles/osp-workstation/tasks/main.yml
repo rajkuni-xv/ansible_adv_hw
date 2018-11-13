@@ -15,7 +15,7 @@
      - ansible
   - name: Install shade library for intercating with Openstack clouds
     pip:
-     name: shade       
+     name: openstacksdk       
   - name: Create openstack directory
     file: name=/etc/openstack state=directory
   - name: Create clouds.yaml file
