@@ -12,7 +12,7 @@
   become: yes
   roles:
     - base-config
-    - {name: lb-tier, tags: [lbs, haproxy]
+    - {name: lb-tier, tags: [lbs, haproxy]}
 
 - name: setup app tier
   hosts: app_servers
@@ -29,6 +29,7 @@
     - {name: geerlingguy.postgresql, tags: [dbs, postgres]}    
 
 - name: smoke test curl to frontend
-  url: http://frontend1.{{ GUID }}.internal
-  method: GET
-  status_code: 200
+  uri:
+    url: http://frontend1.{{ GUID }}.internal
+    method: GET
+    status_code: 200
