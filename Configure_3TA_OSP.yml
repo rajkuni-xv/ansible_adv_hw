@@ -28,9 +28,9 @@
     - {name: base-config, tags: base-config}
     - {name: geerlingguy.postgresql, tags: [dbs, postgres]}    
 
-- name: smoke test curl to frontend
-  hosts: jumpbox
-  uri:
-    url: http://frontend1.{{ GUID }}.internal
-    method: GET
-    status_code: 200
+- hosts: jumpbox
+  tasks:
+  - uri:
+      url: http://frontend1.{{ GUID }}.internal
+      method: GET
+      status_code: 200
