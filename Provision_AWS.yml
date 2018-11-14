@@ -1,0 +1,18 @@
+- hosts: localhost
+  become: true
+  gather_facts: false
+  tasks:
+    - name: create bin directory
+      file:
+        path: /root/bin
+        state: directory
+    - name: get script common.sh
+      get_url:
+        url: http://www.opentlc.com/download/ansible_bootcamp/scripts/common.sh
+        dest: /root/common.sh
+        mode: 0755
+    - name: get script order_svc.sh
+      get_url:
+        url: http://www.opentlc.com/download/ansible_bootcamp/scripts/order_svc.sh
+        dest: /root/order_svc.sh
+        mode: 0755

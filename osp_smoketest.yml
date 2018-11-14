@@ -1,0 +1,19 @@
+- hosts: jumpbox
+  gather_facts: false
+  tasks:
+  - name: Openstack server facts
+    os_server_facts:
+      cloud: ospcloud
+      server: 'frontend'
+    register: frontend_info
+  - name: Print frontend public IP
+    debug:
+      msg: "Frontend server ips: {{ frontend_info.ansible_facts.openstack_servers }}"
+  - name: curl frontend webpage
+    uri:
+      url: "http://{{ item.public_v4 }}"
+      method: GET
+      return_content: yes
+    with_items:
+      - "{{ frontend_info.ansible_facts.openstack_servers }}"
+

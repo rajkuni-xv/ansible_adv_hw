@@ -5,7 +5,7 @@
 - hosts: jumpbox
   gather_facts: true
   roles:
-  - name: osp-facts 
+  - {name: osp-facts, tags: [host_info]}
 
 - name: setup load-balancer tier
   hosts: frontend_servers
@@ -22,15 +22,8 @@
     - {name: app-tier, tags: [apps, tomcat]}
 
 - name: setup database tier
-  become: yes
   hosts: db_servers 
+  become: yes
   roles:
     - {name: base-config, tags: base-config}
     - {name: geerlingguy.postgresql, tags: [dbs, postgres]}    
-
-- hosts: frontend_servers
-  tasks:
-  - uri:
-      url: http://frontend1.{{ GUID }}.internal
-      method: GET
-      status_code: 200
