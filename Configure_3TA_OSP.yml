@@ -28,7 +28,7 @@
     - {name: base-config, tags: base-config}
     - {name: geerlingguy.postgresql, tags: [dbs, postgres]}    
 
-- hosts: jumpbox
+- hosts: frontend_servers
   tasks:
   - uri:
       url: http://frontend1.{{ GUID }}.internal
