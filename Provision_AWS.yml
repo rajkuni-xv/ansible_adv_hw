@@ -1,4 +1,4 @@
-- hosts: bastion 
+- hosts: jumpbox 
   become: true
   gather_facts: false
   tasks:
