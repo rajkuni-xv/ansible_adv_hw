@@ -16,3 +16,15 @@
         url: http://www.opentlc.com/download/ansible_bootcamp/scripts/order_svc.sh
         dest: /root/order_svc.sh
         mode: 0755
+    - name: install jq
+      yum:
+        name: jq
+        state: present
+    - name: Create credentials file
+      copy:
+        content: |
+          export username={{ username }}
+          export password={{ password }}
+          export uri=https://labs.opentlc.com
+        dest: /root/credential.rc
+        mode: 0755
