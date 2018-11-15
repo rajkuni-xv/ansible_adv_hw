@@ -28,3 +28,11 @@
           export uri=https://labs.opentlc.com
         dest: /root/credential.rc
         mode: 0755
+    - name: Run script that orders service on opentlc
+      shell: source /root/credential.rc; /root/order_svc.sh -y -c 'OPENTLC Automation' -i 'Ansible Advanced' -t 1
+      args:
+        chdir: /root
+    - name: Wait for environment to spin up
+      pause:
+        minutes: 15
+     
