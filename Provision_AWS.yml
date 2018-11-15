@@ -29,7 +29,7 @@
         dest: /root/credential.rc
         mode: 0755
     - name: Run script that orders service on opentlc
-      shell: source /root/credential.rc; /root/order_svc.sh -c 'OPENTLC Automation' -y -i 'Ansible Tower Homework Lab' -t 1 > output.txt
+      shell: source /root/credential.rc; /root/order_svc.sh -y -c 'OPENTLC Automation' -i 'Ansible Tower Homework Lab' -t 1 > output.txt
       args:
         chdir: /root
     - name: Wait for environment to spin up
